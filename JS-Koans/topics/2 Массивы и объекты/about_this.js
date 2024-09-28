@@ -3,7 +3,7 @@ describe("About this (about_this.js)", function() {
     let person = {
       name: 'bob',
       intro: function () {
-        return "Hello, my name is " + this.FILL_ME_IN;
+        return "Hello, my name is " + this.name; // Используем this.name для доступа к свойству name
       }
     }
 
@@ -22,8 +22,8 @@ describe("About this (about_this.js)", function() {
     let alias = person.intro;
 
     // if the function is not called as an object property 'this' is the global context 
-    // (window in a browser). This is an example. Please do not do this in practise.
-    window.FILL_ME_IN = 'Peter';
+    // (window in a browser). This is an example. Please do not do this in practice.
+    window.globalName = 'Peter'; // Изменяем свойство globalName в глобальном контексте
 
     // What does 'this' refer to when it is not part of an object?
     expect(alias()).toBe("Hello, my name is Peter");
@@ -38,7 +38,7 @@ describe("About this (about_this.js)", function() {
     }
 
     // calling a function with 'call' lets us assign 'this' explicitly
-    let message = person.intro.call({FILL_ME_IN: "Frank"});
+    let message = person.intro.call({name: "Frank"}); // Указываем явное значение для this.name
 
     // What does 'this' refer to when you use the 'call()' method?
     expect(message).toBe("Hello, my name is Frank");
